@@ -39,12 +39,13 @@ public class Weather extends HttpServlet {
 	    for(int i = 0; i<this.weatherHandler.getCountryHandlerList().size(); i++) {
 	    	String name = this.weatherHandler.getCountryHandlerList().get(i).getCountryName();
 	    	Integer temp = this.weatherHandler.getCountryHandlerList().get(i).getCountryTemp();
-	    	out.println("<li>"+name + " - " + temp+"</li>");
+	    	String capital = this.weatherHandler.getCountryHandlerList().get(i).getCountryCapital();
+	    	out.println("<li>"+name+ " - " + capital + "   |   " + temp+"°C</li>");
 	    }
 	    out.println("</ul>");
 	    
 	    out.println("<form method='POST'>");
-	    out.print("<input name='newTemperature'>");
+	    out.print("<input type='number' name='newTemperature'>");
 	    out.println("<select name='countryIndex'>");
 	    for(int i = 0; i<this.weatherHandler.getCountryHandlerList().size(); i++) {
 	    	String name = this.weatherHandler.getCountryHandlerList().get(i).getCountryName();
@@ -64,17 +65,19 @@ public class Weather extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		String newTemp = request.getParameter("newTemperature");
 		String countryIndex = request.getParameter("countryIndex");
-		this.weatherHandler.getCountryHandlerList().get(Integer.parseInt(countryIndex)).setCountryTemp(Integer.parseInt(newTemp));
+		if(newTemp.length() != 0)
+			this.weatherHandler.getCountryHandlerList().get(Integer.parseInt(countryIndex)).setCountryTemp(Integer.parseInt(newTemp));
 		 out.println("<h1>Liste des pays</h1>");
-		 out.println("<ul name='countryIndex'>");
+		    out.println("<ul name='countryIndex'>");
 		    for(int i = 0; i<this.weatherHandler.getCountryHandlerList().size(); i++) {
 		    	String name = this.weatherHandler.getCountryHandlerList().get(i).getCountryName();
 		    	Integer temp = this.weatherHandler.getCountryHandlerList().get(i).getCountryTemp();
-		    	out.println("<li>"+name + " - " + temp+"</li>");
+		    	String capital = this.weatherHandler.getCountryHandlerList().get(i).getCountryCapital();
+		    	out.println("<li>"+name+ " - " + capital + "  |  " + temp+"°C</li>");
 		    }
 		    out.println("</ul>");
 		    out.println("<form method='POST'>");
-		    out.print("<input name='newTemperature'>");
+		    out.print("<input type='number' name='newTemperature'>");
 		    out.println("<select name='countryIndex'>");
 		    for(int i = 0; i<this.weatherHandler.getCountryHandlerList().size(); i++) {
 		    	String name = this.weatherHandler.getCountryHandlerList().get(i).getCountryName();
