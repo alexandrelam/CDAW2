@@ -1,4 +1,4 @@
-package tp1;
+package imt.nordeurope.douai.j2ee.tp.AlexandreLam;
 
 import java.util.List;
 import java.util.ArrayList;

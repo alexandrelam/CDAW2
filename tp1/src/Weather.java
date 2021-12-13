@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import tp1.WeatherHandler;
+import imt.nordeurope.douai.j2ee.tp.AlexandreLam.WeatherHandler;
 
 /**
  * Servlet implementation class Weather
@@ -80,7 +80,7 @@ public class Weather extends HttpServlet {
 			String capital = this.weatherHandler.getCountryHandlerList().get(i).getCountryCapital();
 			out.println("<li>" + name + " - " + capital + "  |  " + temp + "°C</li>");
 		}
-	w	out.println("</ul>");
+		out.println("</ul>");
 		out.println("<form method='POST'>");
 		out.print("<input type='number' name='newTemperature'>");
 		out.println("<select name='countryIndex'>");

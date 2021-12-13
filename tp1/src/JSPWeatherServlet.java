@@ -10,14 +10,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class helloworld
  */
-@WebServlet("/helloworld")
-public class helloworld extends HttpServlet {
+@WebServlet("/JSPWeather")
+public class JSPWeatherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-	public helloworld() {
+	public JSPWeatherServlet() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -29,7 +29,7 @@ public class helloworld extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-        request.getRequestDispatcher("/WEB-INF/helloworld.jsp").forward(request, response);
+        request.getRequestDispatcher("/WEB-INF/Weather.jsp").forward(request, response);
 	}
 
 	/**

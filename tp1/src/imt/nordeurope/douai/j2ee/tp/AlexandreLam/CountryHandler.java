@@ -1,4 +1,4 @@
-package tp1;
+package imt.nordeurope.douai.j2ee.tp.AlexandreLam;
 
 public class CountryHandler {
 	private String countryName;
