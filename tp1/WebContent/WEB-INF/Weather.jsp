@@ -1,24 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Météo du monde</title>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.6.0"></script>
 <script src="https://cdn.tailwindcss.com"></script>
-<script>
-	// when life is settled, load up the fun stuff
-	document.addEventListener('DOMContentLoaded', function() {
-		new Vue({
-			el : '#app',
-			// define data - initial display text
-			data : {
-				countries : "${weatherlist}"
-			}
-		})
-	})
-</script>
 </head>
 <body>
 	<div id="app">
@@ -38,7 +27,9 @@
 			<div>
 				<label class="mr-2">Selectionnez un pays: </label> <select
 					class="p-1 border mt-2">
-					<option v-for="(country, index) in countries" :key="index">{{country}}</option>
+					<c:forEach items="${weatherlist}" var="weather">
+						<option><c:out value="${weather.countryName}" /></option>
+					</c:forEach>
 				</select>
 			</div>
 			<button type="submit"
@@ -58,7 +49,8 @@
 					<c:forEach items="${weatherlist}" var="weather">
 						<tr>
 							<td class="px-6 py-4"><c:out value="${weather.countryName}" /></td>
-							<td class="px-6 py-4"><c:out value="${weather.countryCapital}" /></td>
+							<td class="px-6 py-4"><c:out
+									value="${weather.countryCapital}" /></td>
 							<td class="px-6 py-4"><c:out value="${weather.countryTemp}" /></td>
 						</tr>
 					</c:forEach>
