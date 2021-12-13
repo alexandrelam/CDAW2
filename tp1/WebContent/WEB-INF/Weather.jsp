@@ -28,8 +28,17 @@
 				<label class="mr-2">Selectionnez un pays: </label> <select
 					name="countryIndex" class="p-1 border mt-2">
 					<c:forEach items="${weatherlist}" var="weather" varStatus="loop">
-						<option value="${loop.index}"><c:out
-								value="${weather.countryName}" /></option>
+						<c:choose>
+							<c:when test="${loop.index==selectedIndex}">
+								<option value="${loop.index}" selected><c:out
+										value="${weather.countryName}" /></option>. 
+							</c:when>
+							<c:otherwise>
+								<option value="${loop.index}"><c:out
+										value="${weather.countryName}" /></option>. 
+							</c:otherwise>
+						</c:choose>
+
 					</c:forEach>
 				</select>
 			</div>

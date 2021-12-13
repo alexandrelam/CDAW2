@@ -41,6 +41,7 @@ public class JSPWeatherServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		request.setAttribute("selectedIndex", request.getParameter("countryIndex"));
 		String newTemp = request.getParameter("newTemperature");
 		String countryIndex = request.getParameter("countryIndex");
 		if (newTemp.length() != 0)
