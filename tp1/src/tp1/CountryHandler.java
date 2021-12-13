@@ -4,7 +4,7 @@ public class CountryHandler {
 	private String countryName;
 	private Integer countryTemp;
 	private String countryCapital;
-	
+
 	public CountryHandler() {
 		this.countryName = "France";
 		this.countryTemp = 10;
@@ -46,5 +46,5 @@ public class CountryHandler {
 	public String toString() {
 		return "CountryHandler [countryName=" + countryName + ", countryTemp=" + countryTemp + "]";
 	}
-	
+
 }
