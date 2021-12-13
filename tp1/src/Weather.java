@@ -34,13 +34,16 @@ public class Weather extends HttpServlet {
 		// TODO Auto-generated method stub
 	    PrintWriter out = response.getWriter();
 	    out.println("<h1>Liste des pays</h1>");
-	    out.println("<ul>");
+	    out.println("<form method='POST'>");
+	    out.println("<select name='countryName'>");
 	    for(int i = 0; i<this.weatherHandler.getCountryHandlerList().size(); i++) {
 	    	String name = this.weatherHandler.getCountryHandlerList().get(i).getCountryName();
 	    	Integer temp = this.weatherHandler.getCountryHandlerList().get(i).getCountryTemp();
-	    	out.println("<li>" + name + " - " + temp + "</li>");
+	    	out.println("<option value='" + name + "' name='" + name +"'>" + name + " - " + temp + "</option>");
 	    }
-	    out.println("</ul>");
+	    out.println("</select>");
+	    out.println("<button type='submit' value='countryName'>submit</button>");
+	    out.println("</form>");
 	 }
 
 	/**
@@ -48,7 +51,9 @@ public class Weather extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		doGet(request, response);
+		PrintWriter out = response.getWriter();
+		String name = request.getParameter("countryName");
+		out.println(name);
 	}
 
 }
