@@ -14,7 +14,7 @@
 			el : '#app',
 			// define data - initial display text
 			data : {
-				countries : [ "France", "Chine", "Chine", "Japon", "Corée" ]
+				countries : "${weatherlist}"
 			}
 		})
 	})
@@ -23,9 +23,10 @@
 <body>
 	<div id="app">
 		<div class="p-6 border-b shadow flex items-center">
-			<h1 class="text-2xl font-bold">Météo de
-				Gulli !</h1>
-			<img alt="theo" class="w-12 h-12 rounded-full shadow object-cover ml-6" src="https://pbs.twimg.com/media/EEdYYn7WwAEcPaI.jpg">
+			<h1 class="text-2xl font-bold">Météo de Gulli !</h1>
+			<img alt="theo"
+				class="w-12 h-12 rounded-full shadow object-cover ml-6"
+				src="https://pbs.twimg.com/media/EEdYYn7WwAEcPaI.jpg">
 		</div>
 
 		<form class="p-6">
@@ -48,28 +49,19 @@
 			<table class="">
 				<thead>
 					<tr class="bg-gray-100 rounded">
-						<th class="px-6 py-4 text-left">Song</th>
-						<th class="px-6 py-4 text-left">Artist</th>
-						<th class="px-6 py-4 text-left">Year</th>
+						<th class="px-6 py-4 text-left">Pays</th>
+						<th class="px-6 py-4 text-left">Capitale</th>
+						<th class="px-6 py-4 text-left">Température (°C)</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td class="px-6 py-4">The Sliding Mr. Bones (Next Stop,
-							Pottersville)</td>
-						<td class="px-6 py-4">Malcolm Lockyer</td>
-						<td class="px-6 py-4">1961</td>
-					</tr>
-					<tr>
-						<td class="px-6 py-4">Witchy Woman</td>
-						<td class="px-6 py-4">The Eagles</td>
-						<td class="px-6 py-4">1972</td>
-					</tr>
-					<tr>
-						<td class="px-6 py-4">Shining Star</td>
-						<td class="px-6 py-4">Earth, Wind, and Fire</td>
-						<td class="px-6 py-4">1975</td>
-					</tr>
+					<c:forEach items="${weatherlist}" var="weather">
+						<tr>
+							<td class="px-6 py-4"><c:out value="${weather.countryName}" /></td>
+							<td class="px-6 py-4"><c:out value="${weather.countryCapital}" /></td>
+							<td class="px-6 py-4"><c:out value="${weather.countryTemp}" /></td>
+						</tr>
+					</c:forEach>
 				</tbody>
 			</table>
 		</div>
