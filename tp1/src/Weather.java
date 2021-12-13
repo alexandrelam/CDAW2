@@ -80,7 +80,7 @@ public class Weather extends HttpServlet {
 			String capital = this.weatherHandler.getCountryHandlerList().get(i).getCountryCapital();
 			out.println("<li>" + name + " - " + capital + "  |  " + temp + "°C</li>");
 		}
-		out.println("</ul>");
+	w	out.println("</ul>");
 		out.println("<form method='POST'>");
 		out.print("<input type='number' name='newTemperature'>");
 		out.println("<select name='countryIndex'>");
