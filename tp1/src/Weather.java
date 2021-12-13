@@ -35,14 +35,15 @@ public class Weather extends HttpServlet {
 	    PrintWriter out = response.getWriter();
 	    out.println("<h1>Liste des pays</h1>");
 	    out.println("<form method='POST'>");
-	    out.println("<select name='countryName'>");
+	    out.print("<input name='newTemperature'>");
+	    out.println("<select name='countryIndex'>");
 	    for(int i = 0; i<this.weatherHandler.getCountryHandlerList().size(); i++) {
 	    	String name = this.weatherHandler.getCountryHandlerList().get(i).getCountryName();
 	    	Integer temp = this.weatherHandler.getCountryHandlerList().get(i).getCountryTemp();
-	    	out.println("<option value='" + name + "' name='" + name +"'>" + name + " - " + temp + "</option>");
+	    	out.println("<option value='" + i + "' name='" + name +"'>" + name + " - " + temp + "</option>");
 	    }
 	    out.println("</select>");
-	    out.println("<button type='submit' value='countryName'>submit</button>");
+	    out.println("<button type='submit' value='countryIndex'>submit</button>");
 	    out.println("</form>");
 	 }
 
@@ -52,8 +53,21 @@ public class Weather extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter out = response.getWriter();
-		String name = request.getParameter("countryName");
-		out.println(name);
+		String newTemp = request.getParameter("newTemperature");
+		String countryIndex = request.getParameter("countryIndex");
+		this.weatherHandler.getCountryHandlerList().get(Integer.parseInt(countryIndex)).setCountryTemp(Integer.parseInt(newTemp));
+		 out.println("<h1>Liste des pays</h1>");
+		    out.println("<form method='POST'>");
+		    out.print("<input name='newTemperature'>");
+		    out.println("<select name='countryIndex'>");
+		    for(int i = 0; i<this.weatherHandler.getCountryHandlerList().size(); i++) {
+		    	String name = this.weatherHandler.getCountryHandlerList().get(i).getCountryName();
+		    	Integer temp = this.weatherHandler.getCountryHandlerList().get(i).getCountryTemp();
+		    	out.println("<option value='" + i + "' name='" + name +"'>" + name + " - " + temp + "</option>");
+		    }
+		    out.println("</select>");
+		    out.println("<button type='submit' value='countryIndex'>submit</button>");
+		    out.println("</form>");
 	}
 
 }
