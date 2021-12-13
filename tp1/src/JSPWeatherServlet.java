@@ -41,8 +41,13 @@ public class JSPWeatherServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		String newTemp = request.getParameter("newTemperature");
+		String countryIndex = request.getParameter("countryIndex");
+		if (newTemp.length() != 0)
+			this.weatherHandler.getCountryHandlerList().get(Integer.parseInt(countryIndex))
+					.setCountryTemp(Integer.parseInt(newTemp));
 		doGet(request, response);
+
 	}
 
 }
