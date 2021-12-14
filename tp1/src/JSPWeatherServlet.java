@@ -14,14 +14,12 @@ import imt.nordeurope.douai.j2ee.tp.AlexandreLam.WeatherHandler;
 @WebServlet("/JSPWeather")
 public class JSPWeatherServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-	private WeatherHandler weatherHandler;
 
 	/**
 	 * @see HttpServlet#HttpServlet()
 	 */
 	public JSPWeatherServlet() {
 		super();
-		this.weatherHandler = new WeatherHandler();
 		// TODO Auto-generated constructor stub
 	}
 
@@ -31,7 +29,11 @@ public class JSPWeatherServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		request.setAttribute("weatherlist", this.weatherHandler.getCountryHandlerList());
+		WeatherHandler weatherHandler = (WeatherHandler) request.getAttribute("WeatherHandler");
+		if (weatherHandler == null)
+			weatherHandler = new WeatherHandler();
+		request.setAttribute("WeatherHandler", weatherHandler);
+		request.setAttribute("weatherlist", weatherHandler.getCountryHandlerList());
 		request.getRequestDispatcher("/WEB-INF/Weather.jsp").forward(request, response);
 	}
 
@@ -41,12 +43,16 @@ public class JSPWeatherServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		WeatherHandler weatherHandler = (WeatherHandler) request.getAttribute("WeatherHandler");
+		if (weatherHandler == null)
+			weatherHandler = new WeatherHandler();
 		request.setAttribute("selectedIndex", request.getParameter("countryIndex"));
 		String newTemp = request.getParameter("newTemperature");
 		String countryIndex = request.getParameter("countryIndex");
 		if (newTemp.length() != 0)
-			this.weatherHandler.getCountryHandlerList().get(Integer.parseInt(countryIndex))
+			weatherHandler.getCountryHandlerList().get(Integer.parseInt(countryIndex))
 					.setCountryTemp(Integer.parseInt(newTemp));
+		request.setAttribute("WeatherHandler", weatherHandler);
 		doGet(request, response);
 
 	}
