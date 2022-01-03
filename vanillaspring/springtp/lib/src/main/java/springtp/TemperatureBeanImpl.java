@@ -6,13 +6,13 @@ import org.springframework.stereotype.Component;
 @Component
 public class TemperatureBeanImpl implements TemperatureBean {
 	private String name;
-	
+
 	@Autowired
 	private TemperatureServiceImpl service;
 
 	public TemperatureBeanImpl(TemperatureServiceImpl service) {
 		super();
-		this.name = "frBean";
+		this.name = "FR";
 		this.service = service;
 	}
 
@@ -28,6 +28,7 @@ public class TemperatureBeanImpl implements TemperatureBean {
 	public void printTemperature() {
 		System.out.println("la température en " + this.getName() + " est "
 				+ this.service.getTemperature(this.name).toString() + " hashcode : " + this.service.hashCode());
+
 	}
 
 	@Override
