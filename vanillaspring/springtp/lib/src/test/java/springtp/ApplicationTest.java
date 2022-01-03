@@ -9,7 +9,7 @@ public class ApplicationTest {
 	@Test
 	public void should_simple_bean_be_injected() {
 		ApplicationContext applicationContext = new ClassPathXmlApplicationContext("application-context.xml");
-		SimpleBeanInjection bean = applicationContext.getBean("monBean", SimpleBeanInjection.class);
+		SimpleBeanInjection bean = (SimpleBeanInjection)applicationContext.getBean("simpleBeanInjection");
 		Assertions.assertNotNull(bean.getSimpleBean());
 	}
 }

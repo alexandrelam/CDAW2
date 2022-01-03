@@ -1,10 +1,22 @@
 package springtp;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
 public class TemperatureBeanImpl implements TemperatureBean {
 	private String name;
-	private TemperatureServiceBean service;
+	
+	@Autowired
+	private TemperatureServiceImpl service;
 
-	public void setService(TemperatureServiceBean service) {
+	public TemperatureBeanImpl(TemperatureServiceImpl service) {
+		super();
+		this.name = "frBean";
+		this.service = service;
+	}
+
+	public void setService(TemperatureServiceImpl service) {
 		this.service = service;
 	}
 
