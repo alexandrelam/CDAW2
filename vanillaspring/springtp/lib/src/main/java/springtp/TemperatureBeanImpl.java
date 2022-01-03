@@ -1,9 +1,11 @@
 package springtp;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 @Component
+@Scope("prototype")
 public class TemperatureBeanImpl implements TemperatureBean {
 	private String name;
 
@@ -26,8 +28,9 @@ public class TemperatureBeanImpl implements TemperatureBean {
 
 	@Override
 	public void printTemperature() {
-		System.out.println("la température en " + this.getName() + " est "
-				+ this.service.getTemperature(this.name).toString() + " hashcode : " + this.service.hashCode());
+		System.out.println(
+				"la température en " + this.getName() + " est " + this.service.getTemperature(this.name).toString()
+						+ " hashcode service : " + this.service.hashCode() + " hashcode object : " + this.hashCode());
 
 	}
 

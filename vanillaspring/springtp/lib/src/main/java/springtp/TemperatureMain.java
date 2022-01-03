@@ -5,20 +5,29 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class TemperatureMain {
 
+	public static void printTemperatures(TemperatureBeanImpl frBean, TemperatureBeanImpl enBean,
+			TemperatureBeanImpl deBean) {
+		for (int i = 0; i < 10; i++) {
+			System.out.println("---" + i + "----");
+			frBean.printTemperature();
+			enBean.printTemperature();
+			deBean.printTemperature();
+		}
+	}
+
 	public static void main(final String[] args) throws Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
-		
+
 		TemperatureBeanImpl frBean = (TemperatureBeanImpl) context.getBean("temperatureBeanImpl");
-		frBean.printTemperature();
 
 		TemperatureBeanImpl enBean = (TemperatureBeanImpl) context.getBean("temperatureBeanImpl");
 		enBean.setName("EN");
-		enBean.printTemperature();
-		
+
 		TemperatureBeanImpl deBean = (TemperatureBeanImpl) context.getBean("temperatureBeanImpl");
-		enBean.setName("DE");
-		enBean.printTemperature();
-		
+		deBean.setName("DE");
+
+		printTemperatures(frBean, enBean, deBean);
+
 		System.out.println("ending...");
 
 	}
