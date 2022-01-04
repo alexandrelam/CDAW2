@@ -4,13 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+@Component
 @Scope("prototype")
-public class TemperatureBeanImpl implements TemperatureBean {
+public class AnnotationTemperatureBeanImpl implements TemperatureBean {
 	private String name;
 
+	@Autowired
 	private TemperatureServiceImpl service;
 
-	public TemperatureBeanImpl(TemperatureServiceImpl service) {
+	public AnnotationTemperatureBeanImpl(TemperatureServiceImpl service) {
 		super();
 		this.name = "FR";
 		this.service = service;

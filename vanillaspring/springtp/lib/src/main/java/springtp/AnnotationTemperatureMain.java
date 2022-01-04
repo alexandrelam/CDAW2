@@ -3,7 +3,7 @@ package springtp;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-public class TemperatureMain {
+public class AnnotationTemperatureMain {
 
 	public static void printTemperatures(TemperatureBeanImpl frBean, TemperatureBeanImpl enBean,
 			TemperatureBeanImpl deBean) {
@@ -18,12 +18,12 @@ public class TemperatureMain {
 	public static void main(final String[] args) throws Exception {
 		ApplicationContext context = new ClassPathXmlApplicationContext("application-context.xml");
 
-		TemperatureBeanImpl frBean = context.getBean("temperatureBeanImpl", TemperatureBeanImpl.class);
+		TemperatureBeanImpl frBean = (TemperatureBeanImpl) context.getBean("temperatureBeanImpl");
 
-		TemperatureBeanImpl enBean = context.getBean("temperatureBeanImpl", TemperatureBeanImpl.class);
+		TemperatureBeanImpl enBean = (TemperatureBeanImpl) context.getBean("temperatureBeanImpl");
 		enBean.setName("EN");
 
-		TemperatureBeanImpl deBean = context.getBean("temperatureBeanImpl", TemperatureBeanImpl.class);
+		TemperatureBeanImpl deBean = (TemperatureBeanImpl) context.getBean("temperatureBeanImpl");
 		deBean.setName("DE");
 
 		printTemperatures(frBean, enBean, deBean);

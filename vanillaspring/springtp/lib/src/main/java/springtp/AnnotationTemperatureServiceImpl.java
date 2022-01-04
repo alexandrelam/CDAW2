@@ -7,11 +7,12 @@ import java.util.Map;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+@Component
 @Scope("singleton")
-public class TemperatureServiceImpl implements TemperatureServiceBean {
+public class AnnotationTemperatureServiceImpl {
 	public static Map<String, Integer> countryTemp;
 
-	public TemperatureServiceImpl() {
+	public AnnotationTemperatureServiceImpl() {
 		this.countryTemp = new HashMap<>();
 		this.countryTemp.put("FR", 15);
 		this.countryTemp.put("DE", 6);
