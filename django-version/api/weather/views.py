@@ -7,6 +7,13 @@ from rest_framework import viewsets
 
 
 class CountryViewSet(viewsets.ModelViewSet):
+    """
+    Returns a list of all countries in the system
+
+    For more details on how accounts are activated please [see here][ref].
+
+    [ref]: http://example.com/activating-accounts
+    """
     serializer_class = CountrySerialier
     queryset = Country.objects.all()
 
