@@ -1,10 +1,10 @@
 from weather.serializers import CountrySerialier, RegionSerialier
 from weather.models import Country, Region
 from rest_framework import viewsets
+from rest_framework.permissions import IsAuthenticated
 
 
 # Create your views here.
-
 
 class CountryViewSet(viewsets.ModelViewSet):
     """
@@ -14,6 +14,7 @@ class CountryViewSet(viewsets.ModelViewSet):
 
     [ref]: http://example.com/activating-accounts
     """
+    permission_classes = [IsAuthenticated]
     serializer_class = CountrySerialier
     queryset = Country.objects.all()
 
