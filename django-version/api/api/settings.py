@@ -39,9 +39,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'drf_yasg',
     'corsheaders',
+    'graphene_django',
     'rest_framework',
     'weather'
 ]
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -62,7 +64,11 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ],
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 1
+    'PAGE_SIZE': 100,
+}
+
+GRAPHENE = {
+    'SCHEMA': 'weather.schema.schema'
 }
 
 AUTHENTICATION_BACKENDS = [

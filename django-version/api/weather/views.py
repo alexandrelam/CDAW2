@@ -1,4 +1,5 @@
 from weather.serializers import CountrySerialier, RegionSerialier
+import django_filters.rest_framework
 from weather.models import Country, Region
 from rest_framework import viewsets
 from rest_framework.permissions import IsAuthenticated
@@ -22,3 +23,4 @@ class CountryViewSet(viewsets.ModelViewSet):
 class RegionViewSet(viewsets.ModelViewSet):
     serializer_class = RegionSerialier
     queryset = Region.objects.all()
+    filter_backends = [django_filters.rest_framework.DjangoFilterBackend]
