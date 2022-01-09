@@ -20,6 +20,11 @@ public class CountryController {
         return countryService.findAll();
     }
 
+    @GetMapping("minTemp/{minTemperature}")
+    public Iterable<CountryModel> findAllWithRegionGreaterThanEqual(@PathVariable String minTemperature) {
+        return countryService.findAllWithRegionGreaterThanEqual(minTemperature);
+    }
+
     @GetMapping("/{id}")
     public CountryModel findById(@PathVariable Long id) {
         return countryService.findById(id);

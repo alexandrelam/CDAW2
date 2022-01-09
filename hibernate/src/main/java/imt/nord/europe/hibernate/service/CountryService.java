@@ -35,4 +35,8 @@ public class CountryService {
         existingRegion.setPresident(countryModel.getPresident());
         return countryRepository.save(existingRegion);
     }
+
+    public Iterable<CountryModel> findAllWithRegionGreaterThanEqual(String minTemperature) {
+        return countryRepository.findAllCountryWithRegionGreaterThanEqual(minTemperature);
+    }
 }
