@@ -14,27 +14,31 @@ public class RegionController {
     @Autowired
     private final RegionService regionService;
 
-    @Operation(summary = "list all regions")
+    @Operation(summary = "List all regions")
     @GetMapping
     public Iterable<RegionModel> findAll() {
         return regionService.findAll();
     }
 
+    @Operation(summary = "Show a region")
     @GetMapping("/{id}")
     public RegionModel findById(@PathVariable Long id){
         return regionService.findById(id);
     }
 
+    @Operation(summary = "Create a new region")
     @PostMapping
     public RegionModel create(@RequestBody RegionModel regionModel){
         return regionService.create(regionModel);
     }
 
+    @Operation(summary = "Update a region")
     @PutMapping
     public RegionModel update(@RequestBody RegionModel regionModel){
         return regionService.update(regionModel);
     }
 
+    @Operation(summary = "Delete a region")
     @DeleteMapping("/{id}")
     public String delete(@PathVariable Long id) {return regionService.delete(id);}
 }
