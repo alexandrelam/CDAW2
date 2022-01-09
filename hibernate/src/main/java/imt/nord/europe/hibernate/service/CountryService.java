@@ -6,8 +6,6 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
-
 @Service
 @AllArgsConstructor
 public class CountryService {
@@ -18,7 +16,23 @@ public class CountryService {
         return countryRepository.findAll();
     }
 
-    public Optional<CountryModel> findById(Long id){
-        return countryRepository.findById(id);
+    public CountryModel findById(Long id){
+        return countryRepository.findById(id).orElse(null);
+    }
+
+    public String delete(Long id){
+        countryRepository.deleteById(id);
+        return "country with id: " + id + " removed!";
+    }
+
+    public CountryModel create(CountryModel countryModel) {
+        return countryRepository.save(countryModel);
+    }
+
+    public CountryModel update(CountryModel countryModel) {
+        CountryModel existingRegion = countryRepository.findById(countryModel.getCountryId()).orElse(null);
+        existingRegion.setName(countryModel.getName());
+        existingRegion.setPresident(countryModel.getPresident());
+        return countryRepository.save(existingRegion);
     }
 }

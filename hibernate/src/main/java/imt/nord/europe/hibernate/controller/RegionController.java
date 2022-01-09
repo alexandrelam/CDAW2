@@ -5,12 +5,7 @@ import imt.nord.europe.hibernate.service.RegionService;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.Optional;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
@@ -26,7 +21,20 @@ public class RegionController {
     }
 
     @GetMapping("/{id}")
-    public Optional<RegionModel> findById(@PathVariable Long id){
+    public RegionModel findById(@PathVariable Long id){
         return regionService.findById(id);
     }
+
+    @PostMapping
+    public RegionModel create(@RequestBody RegionModel regionModel){
+        return regionService.create(regionModel);
+    }
+
+    @PutMapping
+    public RegionModel update(@RequestBody RegionModel regionModel){
+        return regionService.update(regionModel);
+    }
+
+    @DeleteMapping("/{id}")
+    public String delete(@PathVariable Long id) {return regionService.delete(id);}
 }
