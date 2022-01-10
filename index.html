@@ -13,12 +13,13 @@
       console.log("test");
       fetch("http://localhost:8084/api/v1/country/")
         .then((res) => {
+          console.log(res);
           return res.json();
         })
         .then((value) => {
           console.log(value);
           document.getElementById("content-wrapper").innerHTML =
-            JSON.stringify(value);
+            value[0].president;
         });
     </script>
   </body>
