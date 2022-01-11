@@ -28,13 +28,13 @@ public class AccountModel {
     @Column(name = "amount")
     Integer amountInCents;
 
+    //@JsonManagedReference(value="transaction_as_sender")
     @Column(name = "transaction_as_sender")
-    @JsonBackReference
     @OneToMany(mappedBy = "sender")
     Set<TransactionModel> sender;
 
+    //@JsonManagedReference(value="transaction_as_receiver")
     @Column(name = "transaction_as_receiver")
-    @JsonBackReference
     @OneToMany(mappedBy = "receiver")
     Set<TransactionModel> receiver;
 }

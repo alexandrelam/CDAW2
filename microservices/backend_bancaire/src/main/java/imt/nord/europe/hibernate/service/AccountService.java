@@ -16,4 +16,7 @@ public class AccountService {
         return accountRepository.findAll();
     }
 
+    public AccountModel create(AccountModel accountModel) {
+        return accountRepository.save(accountModel);
+    }
 }

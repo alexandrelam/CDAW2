@@ -20,4 +20,9 @@ public class AccountController {
         return accountService.findAll();
     }
 
+    @Operation(summary = "Create a new account")
+    @PostMapping
+    public AccountModel create(@RequestBody AccountModel accountModel){
+        return accountService.create(accountModel);
+    }
 }
