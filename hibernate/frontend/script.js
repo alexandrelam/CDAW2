@@ -65,8 +65,8 @@ list.addEventListener("change", function () {
   for (let region of selectedCountry.regions) {
     let regionCard = document.createElement("div");
     regionCard.classList.add("region");
-    let nom = document.createElement("div");
-    let temperature = document.createElement("div");
+    let nom = document.createElement("span");
+    let temperature = document.createElement("span");
     nom.innerText = "Nom : " + region.name;
     temperature.innerText = " Il fait : " + region.temperature + "°C";
     regionCard.appendChild(nom);
