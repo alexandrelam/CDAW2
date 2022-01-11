@@ -13,9 +13,15 @@ import org.springframework.stereotype.Service;
 public class TransactionService {
     @Autowired
     private final TransactionRepository transactionRepository;
+    private final AccountRepository accountRepository;
 
-    public Iterable<TransactionModel> findAll(){
+    public Iterable<TransactionModel> findAll() {
         return transactionRepository.findAll();
     }
 
+    public Iterable<TransactionModel> findByAccount(Long id) {
+        AccountModel account = accountRepository.findById(id).orElse(null);
+        Iterable<TransactionModel> transactions = transactionRepository.findBySenderOrReceiver(account, account);
+        return transactions;
+    }
 }

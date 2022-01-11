@@ -1,6 +1,7 @@
 package imt.nord.europe.hibernate.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,13 +20,13 @@ public class TransactionModel {
 
     @ManyToOne
     @NonNull
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "sender", referencedColumnName="account_id")
    AccountModel sender;
 
     @ManyToOne
     @NonNull
-    @JsonBackReference
+    @JsonManagedReference
     @JoinColumn(name = "receiver", referencedColumnName="account_id")
     AccountModel receiver;
 

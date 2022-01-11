@@ -1,5 +1,6 @@
 package imt.nord.europe.hibernate.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -28,12 +29,12 @@ public class AccountModel {
     Integer amountInCents;
 
     @Column(name = "transaction_as_sender")
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "sender")
     Set<TransactionModel> sender;
 
     @Column(name = "transaction_as_receiver")
-    @JsonManagedReference
+    @JsonBackReference
     @OneToMany(mappedBy = "receiver")
     Set<TransactionModel> receiver;
 }
