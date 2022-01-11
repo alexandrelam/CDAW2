@@ -61,6 +61,7 @@ for (let pays of country) {
 list.addEventListener("change", function () {
   let selectedCountry = country[0]; //fetch en fct de selected-country
   let regionTableau = document.getElementById("tab-region");
+  regionTableau.innerHTML = "";
   for (let region of selectedCountry.regions) {
     let regionCard = document.createElement("div");
     regionCard.classList.add("region");
