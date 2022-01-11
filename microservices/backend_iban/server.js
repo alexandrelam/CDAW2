@@ -14,10 +14,6 @@ app.use(
   })
 );
 
-app.get("/", (req, res) => {
-  res.send("Hello World");
-});
-
 app.post("/verify/iban", (req, res) => {
   const payload = req.body;
   let response = { isValid: false };
