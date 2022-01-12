@@ -42,6 +42,8 @@ function generateSelect() {
   let list = document.getElementById("country-select");
   list.innerHTML =
     "<option value='' disabled selected>Choisir un pays</option>";
+  let regionTableau = document.getElementById("tab-region");
+  regionTableau.innerHTML = "";
   for (let pays of countries) {
     let option = document.createElement("option");
     option.value = pays.countryId;
