@@ -1,6 +1,7 @@
 package imt.nord.europe.hibernate.repository;
 
 import imt.nord.europe.hibernate.model.CountryModel;
+import imt.nord.europe.hibernate.model.RegionModel;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;

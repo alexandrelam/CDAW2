@@ -1,5 +1,6 @@
 package imt.nord.europe.hibernate.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 
@@ -26,8 +27,8 @@ public class CountryModel {
     @Column(name = "president")
     String president;
 
-    @Column(name = "comment")
-    @JsonManagedReference
+    @Column(name = "country")
+    @JsonIgnore
     @OneToMany(mappedBy = "country")
     Set<RegionModel> regions;
 }

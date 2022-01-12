@@ -1,5 +1,6 @@
 package imt.nord.europe.hibernate.controller;
 
+import imt.nord.europe.hibernate.model.CountryModel;
 import imt.nord.europe.hibernate.model.RegionModel;
 import imt.nord.europe.hibernate.service.RegionService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -9,25 +10,32 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(path = "api/v1/region")
+@RequestMapping(path = "api/v1")
 public class RegionController {
     @Autowired
     private final RegionService regionService;
 
     @Operation(summary = "List all regions")
-    @GetMapping
+    @GetMapping("/region")
     public Iterable<RegionModel> findAll() {
         return regionService.findAll();
     }
 
     @Operation(summary = "Show a region")
-    @GetMapping("/{id}")
+    @GetMapping("/region/{id}")
     public RegionModel findById(@PathVariable Long id){
         return regionService.findById(id);
     }
 
+
+    @Operation(summary = "List all regions from a country")
+    @GetMapping("/country/{id}/region")
+    public Iterable<RegionModel> findRegionsByCountry(@PathVariable Long id) {
+        return regionService.findRegionsByCountry(id);
+    }
+
     @Operation(summary = "Create a new region")
-    @PostMapping
+    @PostMapping("/region")
     public RegionModel create(@RequestBody RegionModel regionModel){
         return regionService.create(regionModel);
     }
@@ -39,6 +47,6 @@ public class RegionController {
     }
 
     @Operation(summary = "Delete a region")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("region/{id}")
     public String delete(@PathVariable Long id) {return regionService.delete(id);}
 }
