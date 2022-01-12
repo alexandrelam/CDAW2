@@ -28,7 +28,6 @@ public class RegionModel {
 
     @ManyToOne
     @NonNull
-    @JsonIgnore
     @JoinColumn(name = "country_id")
     private CountryModel country;
 }
