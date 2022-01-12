@@ -1,9 +1,12 @@
 //requete qui genere la liste des country
 let countries;
+let countryId = -1;
 fetchCountriesInitial();
 const allCountriesButton = document.getElementById("pays-normal");
 allCountriesButton.addEventListener("click", fetchCountriesInitial);
 const hotCountriesButton = document.getElementById("pays-chaud");
+hotCountriesButton.addEventListener("click", fetchHotCountries);
+const addRegionButton = document.getElementById("pays-chaud");
 hotCountriesButton.addEventListener("click", fetchHotCountries);
 
 function fetchCountriesInitial() {
@@ -26,7 +29,7 @@ function fetchHotCountries() {
       generateSelect();
     });
 }
-function fetchCountries(idCountry) {
+function fetchCountries() {
   fetch("http://localhost:8084/api/v1/country")
     .then(function (res) {
       return res.json();
@@ -34,11 +37,12 @@ function fetchCountries(idCountry) {
     .then(function (val) {
       countries = val;
     })
-    .then(() => refresh(idCountry));
+    .then(() => refresh());
 }
 
 // génération du menu déroulant en fonction des pays renovyés par la requête
 function generateSelect() {
+  countryId = -1;
   let list = document.getElementById("country-select");
   list.innerHTML =
     "<option value='' disabled selected>Choisir un pays</option>";
@@ -51,14 +55,15 @@ function generateSelect() {
     list.add(option);
   }
   list.addEventListener("change", function (event) {
+    countryId = event.target.value;
     refresh(event.target.value);
   });
 }
 
 // refresh de la page en fonction du choix
-function refresh(idCountry) {
+function refresh() {
   let regions;
-  fetch(`http://localhost:8084/api/v1/country/${idCountry}/region`)
+  fetch(`http://localhost:8084/api/v1/country/${countryId}/region`)
     .then(function (res) {
       return res.json();
     })
@@ -66,7 +71,6 @@ function refresh(idCountry) {
       regions = val;
     })
     .then(function () {
-      console.log(regions + "" + idCountry);
       let regionTableau = document.getElementById("tab-region");
       regionTableau.innerHTML = "";
       for (let region of regions) {
@@ -76,7 +80,7 @@ function refresh(idCountry) {
         bouton.classList.add("bouton");
         bouton.innerText = "-";
         bouton.addEventListener("click", () => {
-          deleteRegion(region.regionId, idCountry);
+          deleteRegion(region.regionId);
         });
         let nom = document.createElement("span");
         let temperature = document.createElement("span");
@@ -88,11 +92,34 @@ function refresh(idCountry) {
       }
     });
 }
-function deleteRegion(idRegion, idCountry) {
+function deleteRegion(idRegion) {
   fetch(`http://localhost:8084/api/v1/region/${idRegion}`, {
     method: "DELETE",
   })
     .then((res) => res.text())
     .then((res) => console.log(res))
-    .then(() => fetchCountries(idCountry));
+    .then(() => fetchCountries());
 }
+
+document.getElementById("create-region").onsubmit = function (event) {
+  if (countryId === -1) {
+    event.preventDefault();
+    alert("Sélectionnez un pays ou tchetche");
+  } else {
+    const name = document.getElementById("input-name").value;
+    const temp = document.getElementById("input-temp").value;
+    let payload = {
+      name: name,
+      temperature: temp,
+      country: { countryId: parseInt(countryId) },
+    };
+    fetch(`http://localhost:8084/api/v1/region`, {
+      method: "POST",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+  }
+};
