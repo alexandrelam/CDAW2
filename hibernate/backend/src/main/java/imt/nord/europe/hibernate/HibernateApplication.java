@@ -29,9 +29,14 @@ public class HibernateApplication {
 			repository.save(new TemperatureModel("Allemagne", 15));
 		    repository.save(new TemperatureModel("Angleterre", 5));
 
-			CountryModel France = countryRepository.save(new CountryModel("France", "Macron"));
-			regionRepository.save(new RegionModel("IDF", 15, France));
-			regionRepository.save(new RegionModel("Nord", 5, France));
+			CountryModel france = countryRepository.save(new CountryModel("France", "Macron"));
+			regionRepository.save(new RegionModel("IDF", 15, france));
+			regionRepository.save(new RegionModel("Nord", 5, france));
+			regionRepository.save(new RegionModel("Sud", 33, france));
+
+			CountryModel allemagne = countryRepository.save(new CountryModel("Allemagne", "Pas Merkel"));
+			regionRepository.save(new RegionModel("Sud", -15, allemagne));
+			regionRepository.save(new RegionModel("Nord", 11, allemagne));
 		};
 	}
 }

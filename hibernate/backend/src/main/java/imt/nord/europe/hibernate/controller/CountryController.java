@@ -21,7 +21,7 @@ public class CountryController {
     }
 
     @Operation(summary = "List all countries whose regions have a minimum temperature of {minTemperature}")
-    @GetMapping("minTemp/{minTemperature}")
+    @GetMapping("minTemp/{minTemperature}/region")
     public Iterable<CountryModel> findAllWithRegionGreaterThanEqual(@PathVariable String minTemperature) {
         return countryService.findAllWithRegionGreaterThanEqual(minTemperature);
     }
