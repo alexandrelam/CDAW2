@@ -9,42 +9,42 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @AllArgsConstructor
-@RequestMapping(path = "api/v1/country")
+@RequestMapping(path = "api/v1")
 public class CountryController {
     @Autowired
     private final CountryService countryService;
 
     @Operation(summary = "List all countries and their regions")
-    @GetMapping
+    @GetMapping("/country")
     public Iterable<CountryModel> findAll() {
         return countryService.findAll();
     }
 
     @Operation(summary = "List all countries whose regions have a minimum temperature of {minTemperature}")
-    @GetMapping("minTemp/{minTemperature}/region")
+    @GetMapping("/region/minTemp/{minTemperature}/country")
     public Iterable<CountryModel> findAllWithRegionGreaterThanEqual(@PathVariable String minTemperature) {
         return countryService.findAllWithRegionGreaterThanEqual(minTemperature);
     }
 
     @Operation(summary = "Show a country and its region")
-    @GetMapping("/{id}")
+    @GetMapping("/country/{id}")
     public CountryModel findById(@PathVariable Long id) {
         return countryService.findById(id);
     }
 
     @Operation(summary = "Create a new country")
-    @PostMapping
+    @PostMapping("/country")
     public CountryModel create(@RequestBody CountryModel countryModel){
         return countryService.create(countryModel);
     }
 
     @Operation(summary = "Update a country")
-    @PutMapping
+    @PutMapping("/country")
     public CountryModel update(@RequestBody CountryModel countryModel){
         return countryService.update(countryModel);
     }
 
     @Operation(summary = "Delete an existing country")
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/country/{id}")
     public String delete(@PathVariable Long id) {return countryService.delete(id);}
 }
