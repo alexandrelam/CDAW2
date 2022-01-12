@@ -1,4 +1,14 @@
 //requete qui genere la liste des country
+let countries;
+fetch("http://localhost:8084/api/v1/country")
+  .then(function (res) {
+    return res.json();
+  })
+  .then(function (val) {
+    countries = val;
+    console.log(countries);
+  });
+
 const country = [
   {
     name: "France",
@@ -51,11 +61,16 @@ for (let pays of country) {
 list.addEventListener("change", function () {
   let selectedCountry = country[0]; //fetch en fct de selected-country
   let regionTableau = document.getElementById("tab-region");
+  regionTableau.innerHTML = "";
   for (let region of selectedCountry.regions) {
     let regionCard = document.createElement("div");
     regionCard.classList.add("region");
-    regionCard.innerText =
-      "Nom : " + region.name + " Il fait : " + region.temperature + "°C";
+    let nom = document.createElement("span");
+    let temperature = document.createElement("span");
+    nom.innerText = "Nom : " + region.name;
+    temperature.innerText = " Il fait : " + region.temperature + "°C";
+    regionCard.appendChild(nom);
+    regionCard.appendChild(temperature);
     regionTableau.appendChild(regionCard);
   }
 });
