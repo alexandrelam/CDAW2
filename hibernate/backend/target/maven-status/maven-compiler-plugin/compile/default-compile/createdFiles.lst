@@ -5,7 +5,6 @@ imt/nord/europe/hibernate/service/RegionService.class
 imt/nord/europe/hibernate/controller/TemperatureController.class
 imt/nord/europe/hibernate/service/CountryService.class
 imt/nord/europe/hibernate/repository/TemperatureRepository.class
-MyConfiguration.class
 imt/nord/europe/hibernate/model/CountryModel.class
 imt/nord/europe/hibernate/service/TemperatureService.class
 imt/nord/europe/hibernate/model/TemperatureModel.class

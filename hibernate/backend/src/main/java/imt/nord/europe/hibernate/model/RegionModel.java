@@ -1,6 +1,7 @@
 package imt.nord.europe.hibernate.model;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -27,7 +28,7 @@ public class RegionModel {
 
     @ManyToOne
     @NonNull
-    @JsonBackReference
+    @JsonIgnore
     @JoinColumn(name = "country_id")
     private CountryModel country;
 }

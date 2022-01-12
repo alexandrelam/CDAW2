@@ -1,9 +1,6 @@
 package imt.nord.europe.hibernate.model;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 
 import javax.persistence.*;
@@ -16,9 +13,6 @@ import java.util.Set;
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Table(name = "account")
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "accountId")
 public class AccountModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -33,12 +27,12 @@ public class AccountModel {
     @Column(name = "amount")
     Integer amountInCents;
 
-    //@JsonManagedReference(value="transaction_as_sender")
+    @JsonIgnore
     @Column(name = "transaction_as_sender")
     @OneToMany(mappedBy = "sender")
     Set<TransactionModel> sender;
 
-    //@JsonManagedReference(value="transaction_as_receiver")
+    @JsonIgnore
     @Column(name = "transaction_as_receiver")
     @OneToMany(mappedBy = "receiver")
     Set<TransactionModel> receiver;

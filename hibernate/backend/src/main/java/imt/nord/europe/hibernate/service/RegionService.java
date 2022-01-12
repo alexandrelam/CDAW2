@@ -1,6 +1,8 @@
 package imt.nord.europe.hibernate.service;
 
+import imt.nord.europe.hibernate.model.CountryModel;
 import imt.nord.europe.hibernate.model.RegionModel;
+import imt.nord.europe.hibernate.repository.CountryRepository;
 import imt.nord.europe.hibernate.repository.RegionRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.stereotype.Service;
 public class RegionService {
     @Autowired
     private final RegionRepository regionRepository;
+    private final CountryRepository countryRepository;
 
     public Iterable<RegionModel> findAll(){
         return regionRepository.findAll();
@@ -35,5 +38,9 @@ public class RegionService {
         existingRegion.setTemperature(regionModel.getTemperature());
         existingRegion.setCountry(regionModel.getCountry());
         return regionRepository.save(existingRegion);
+    }
+
+    public Iterable<RegionModel> findRegionsByCountry(Long id) {
+        return regionRepository.findAllByCountry(countryRepository.findById(id).orElse(null));
     }
 }

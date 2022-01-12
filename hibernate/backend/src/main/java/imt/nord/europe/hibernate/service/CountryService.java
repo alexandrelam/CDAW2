@@ -39,4 +39,5 @@ public class CountryService {
     public Iterable<CountryModel> findAllWithRegionGreaterThanEqual(String minTemperature) {
         return countryRepository.findAllCountryWithRegionGreaterThanEqual(minTemperature);
     }
+
 }
