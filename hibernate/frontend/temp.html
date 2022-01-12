@@ -1,23 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
+  <body>
     <div id="wrapper">
-        <select name="country" id="country-select">
-            <option value="" disabled selected>Choisir un pays</option>
-        </select>
-        <div id="flag">flag_images</div>
-        <div id=tab-region>
+      <select name="country" id="country-select">
+        <option value="" disabled selected>Choisir un pays</option>
+      </select>
+      <div id="countainer-header">
+        <div id="countainer-button">
+          <button id="pays-normal" class="pays-bouton">
+            Affichez tous les pays
+          </button>
+          <button id="pays-chaud" class="pays-bouton">
+            N'affichez que les pays avec une température supérieur à 12°C
+          </button>
         </div>
+        <div id="flag">flag_images</div>
+        <form id="create-region">
+          <input type="text" placeholder="region name" />
+          <input type="number" placeholder="°C" />
+          <button type="submit">Créer région</button>
+        </form>
+      </div>
+      <div id="tab-region"></div>
     </div>
     <script src="script.js"></script>
-</body>
+  </body>
 </html>

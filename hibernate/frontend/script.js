@@ -1,6 +1,10 @@
 //requete qui genere la liste des country
 let countries;
 fetchCountriesInitial();
+const allCountriesButton = document.getElementById("pays-normal");
+allCountriesButton.addEventListener("click", fetchCountriesInitial);
+const hotCountriesButton = document.getElementById("pays-chaud");
+hotCountriesButton.addEventListener("click", fetchHotCountries);
 
 function fetchCountriesInitial() {
   fetch("http://localhost:8084/api/v1/country")
@@ -12,7 +16,16 @@ function fetchCountriesInitial() {
       generateSelect();
     });
 }
-
+function fetchHotCountries() {
+  fetch("http://localhost:8084/api/v1/region/minTemp/12/country")
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (val) {
+      countries = val;
+      generateSelect();
+    });
+}
 function fetchCountries(idCountry) {
   fetch("http://localhost:8084/api/v1/country")
     .then(function (res) {
@@ -41,7 +54,6 @@ function generateSelect() {
 }
 
 // refresh de la page en fonction du choix
-
 function refresh(idCountry) {
   let regions;
   fetch(`http://localhost:8084/api/v1/country/${idCountry}/region`)
