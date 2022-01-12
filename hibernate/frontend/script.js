@@ -1,7 +1,8 @@
 //requete qui genere la liste des country
 let countries;
-fetchCountries();
-function fetchCountries() {
+fetchCountriesInitial();
+
+function fetchCountriesInitial() {
   fetch("http://localhost:8084/api/v1/country")
     .then(function (res) {
       return res.json();
@@ -9,8 +10,18 @@ function fetchCountries() {
     .then(function (val) {
       countries = val;
       generateSelect();
+    });
+}
+
+function fetchCountries(idCountry) {
+  fetch("http://localhost:8084/api/v1/country")
+    .then(function (res) {
+      return res.json();
     })
-    .then(() => refresh());
+    .then(function (val) {
+      countries = val;
+    })
+    .then(() => refresh(idCountry));
 }
 
 // génération du menu déroulant en fonction des pays renovyés par la requête
@@ -41,6 +52,7 @@ function refresh(idCountry) {
       regions = val;
     })
     .then(function () {
+      console.log(regions + "" + idCountry);
       let regionTableau = document.getElementById("tab-region");
       regionTableau.innerHTML = "";
       for (let region of regions) {
@@ -50,7 +62,7 @@ function refresh(idCountry) {
         bouton.classList.add("bouton");
         bouton.innerText = "-";
         bouton.addEventListener("click", () => {
-          deleteRegion(region.regionId);
+          deleteRegion(region.regionId, idCountry);
         });
         let nom = document.createElement("span");
         let temperature = document.createElement("span");
@@ -62,11 +74,11 @@ function refresh(idCountry) {
       }
     });
 }
-function deleteRegion(id) {
-  fetch(`http://localhost:8084/api/v1/region/${id}`, {
+function deleteRegion(idRegion, idCountry) {
+  fetch(`http://localhost:8084/api/v1/region/${idRegion}`, {
     method: "DELETE",
   })
     .then((res) => res.text())
     .then((res) => console.log(res))
-    .then(() => fetchCountries());
+    .then(() => fetchCountries(idCountry));
 }
