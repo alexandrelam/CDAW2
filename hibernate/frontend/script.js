@@ -104,22 +104,27 @@ function deleteRegion(idRegion) {
 document.getElementById("create-region").onsubmit = function (event) {
   if (countryId === -1) {
     event.preventDefault();
-    alert("Sélectionnez un pays ou tchetche");
+    alert("Sélectionnez un pays");
   } else {
     const name = document.getElementById("input-name").value;
     const temp = document.getElementById("input-temp").value;
-    let payload = {
-      name: name,
-      temperature: temp,
-      country: { countryId: parseInt(countryId) },
-    };
-    fetch(`http://localhost:8084/api/v1/region`, {
-      method: "POST",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+    if (name == "" || temp == "") {
+      event.preventDefault();
+      alert("Remplissez le formulaire");
+    } else {
+      let payload = {
+        name: name,
+        temperature: temp,
+        country: { countryId: parseInt(countryId) },
+      };
+      fetch(`http://localhost:8084/api/v1/region`, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(payload),
+      });
+    }
   }
 };
