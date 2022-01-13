@@ -102,14 +102,13 @@ function deleteRegion(idRegion) {
 }
 
 document.getElementById("create-region").onsubmit = function (event) {
+  event.preventDefault();
   if (countryId === -1) {
-    event.preventDefault();
     alert("Sélectionnez un pays");
   } else {
     const name = document.getElementById("input-name").value;
     const temp = document.getElementById("input-temp").value;
     if (name == "" || temp == "") {
-      event.preventDefault();
       alert("Remplissez le formulaire");
     } else {
       let payload = {
@@ -124,7 +123,7 @@ document.getElementById("create-region").onsubmit = function (event) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(payload),
-      });
+      }).then(() => refresh());
     }
   }
 };
