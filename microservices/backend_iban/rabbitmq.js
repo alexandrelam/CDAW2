@@ -1,4 +1,5 @@
-var amqp = require("amqplib/callback_api");
+const validate_iban = require("./validate.js");
+const amqp = require("amqplib/callback_api");
 
 console.log("starting iban validate rabbitmq");
 
@@ -11,16 +12,43 @@ amqp.connect("amqp://rabbitmq", function (error0, connection) {
     if (error1) {
       throw error1;
     }
-    let queue = "validate_iban";
 
-    channel.assertQueue(queue, {
+    channel.assertQueue("transaction-validate-queue", {
       durable: false,
     });
 
-    console.log(" [*] Waiting for messages in %s. To exit press CTRL+C", queue);
+    channel.assertQueue("account-validate-queue", {
+      durable: false,
+    });
+
     channel.consume(
-      queue,
+      "transaction-validate-queue",
       function (msg) {
+        const payload = JSON.parse(msg.content.toString());
+
+        console.log(" [x] Received %s", msg.content.toString());
+        if (
+          validate_iban(payload.sender_iban) &&
+          validate_iban(payload.receiver_iban)
+        ) {
+          channel.sendToQueue(
+            "transaction-create-queue",
+            Buffer.from(JSON.stringify(payload))
+          );
+          console.log("iban valid! sending message to create account");
+        } else {
+          console.log("payload not valid!");
+        }
+      },
+      {
+        noAck: true,
+      }
+    );
+
+    channel.consume(
+      "account-validate-queue",
+      function (msg) {
+        const payload = JSON.parse(msg.content.toString());
         console.log(" [x] Received %s", msg.content.toString());
       },
       {

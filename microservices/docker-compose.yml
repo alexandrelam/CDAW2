@@ -39,6 +39,8 @@ services:
     build:
       context: ./backend_iban
       dockerfile: Dockerfile
+    depends_on:
+      - "rabbitmq"
     ports:
       - "8085:8085"
     restart: always
@@ -47,6 +49,8 @@ services:
     build:
       context: ./backend_transaction
       dockerfile: Dockerfile
+    depends_on:
+      - "rabbitmq"
     ports:
       - "8086:8086"
     restart: always

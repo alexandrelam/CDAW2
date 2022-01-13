@@ -18,7 +18,7 @@ app.use(
 app.post("/transaction", (req, res) => {
   const payload = req.body;
 
-  if (!payload.sender || !payload.receiver || !payload.amountInCents)
+  if (!payload.sender_iban || !payload.receiver_iban || !payload.amountInCents)
     return res.status(400).send("incorrect payload");
 
   amqp.connect("amqp://rabbitmq", function (error0, connection) {
@@ -29,7 +29,7 @@ app.post("/transaction", (req, res) => {
       if (error1) {
         throw error1;
       }
-      const queue = "validate_iban";
+      const queue = "transaction-validate-queue";
 
       channel.assertQueue(queue, {
         durable: false,
