@@ -29,14 +29,14 @@ app.post("/transaction", (req, res) => {
       if (error1) {
         throw error1;
       }
-      const queue = "make_transaction";
+      const queue = "validate_iban";
 
       channel.assertQueue(queue, {
         durable: false,
       });
 
       channel.sendToQueue(queue, Buffer.from(JSON.stringify(payload)));
-      console.log(" [x] Sent %s", payload);
+      console.log(" [x] Sent %s to be validated", payload);
     });
   });
 

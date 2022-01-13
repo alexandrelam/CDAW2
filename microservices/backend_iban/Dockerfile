@@ -16,4 +16,4 @@ RUN npm install
 COPY . .
 
 EXPOSE 8085
-CMD [ "node", "server.js" ]
+CMD [ "node",  "rabbitmq.js" ]

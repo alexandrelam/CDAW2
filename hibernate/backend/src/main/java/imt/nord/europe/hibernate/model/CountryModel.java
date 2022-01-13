@@ -27,6 +27,10 @@ public class CountryModel {
     @Column(name = "president")
     String president;
 
+    @NonNull
+    @Column(name = "flag_url")
+    String flag_url;
+
     @Column(name = "country")
     @JsonIgnore
     @OneToMany(mappedBy = "country")
