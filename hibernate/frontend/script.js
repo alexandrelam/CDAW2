@@ -56,8 +56,25 @@ function generateSelect() {
   }
   list.addEventListener("change", function (event) {
     countryId = event.target.value;
-    refresh(event.target.value);
+    refresh();
+    changePresident();
   });
+}
+
+//change le nom du président
+function changePresident() {
+  let presidentName;
+  fetch(`http://localhost:8084/api/v1/country/${countryId}`)
+    .then(function (res) {
+      return res.json();
+    })
+    .then(function (val) {
+      presidentName = val.president;
+    })
+    .then(function () {
+      let president = document.getElementById("president-case");
+      president.innerHTML = "Président : " + presidentName;
+    });
 }
 
 // refresh de la page en fonction du choix
