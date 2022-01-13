@@ -43,6 +43,14 @@ services:
       - "8085:8085"
     restart: always
 
+  app-transaction:
+    build:
+      context: ./backend_transaction
+      dockerfile: Dockerfile
+    ports:
+      - "8086:8086"
+    restart: always
+
   rabbitmq:
     image: rabbitmq:3.9.12-management
     ports:
