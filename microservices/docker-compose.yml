@@ -8,10 +8,12 @@ services:
       - "8084:8084"
     depends_on:
       - "db-bancaire"
+      - "rabbitmq"
     restart: always
     environment:
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: spring
+      SPRING_RABBITMQ_HOST: rabbitmq
 
   db-bancaire:
     image: mysql:latest
@@ -40,3 +42,9 @@ services:
     ports:
       - "8085:8085"
     restart: always
+
+  rabbitmq:
+    image: rabbitmq:3.9.12-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
