@@ -1,5 +1,6 @@
 package imt.nord.europe.hibernate;
 
+import com.google.gson.Gson;
 import imt.nord.europe.hibernate.model.AccountModel;
 import imt.nord.europe.hibernate.model.TransactionModel;
 import imt.nord.europe.hibernate.repository.AccountRepository;
@@ -11,6 +12,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @SpringBootApplication
 @EnableWebMvc
@@ -30,10 +34,6 @@ public class HibernateApplication {
         return new Queue("account-create-queue", false);
     }
 
-    @RabbitListener(queues = "account-create-queue")
-    public void listen(String in) {
-        System.out.println("Message read from myQueue : " + in);
-    }
 
     @Bean
     public CommandLineRunner factory(AccountRepository accountRepository, TransactionRepository transactionRepository) {

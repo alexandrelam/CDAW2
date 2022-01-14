@@ -49,7 +49,15 @@ amqp.connect("amqp://rabbitmq", function (error0, connection) {
       "account-validate-queue",
       function (msg) {
         const payload = JSON.parse(msg.content.toString());
-        console.log(" [x] Received %s", msg.content.toString());
+        if (validate_iban(payload.iban)) {
+          channel.sendToQueue(
+            "account-create-queue",
+            Buffer.from(JSON.stringify(payload))
+          );
+          console.log(`account with payload ${payload} valid`);
+        } else {
+          console.log("payload with iban not valid");
+        }
       },
       {
         noAck: true,
