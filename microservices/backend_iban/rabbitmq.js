@@ -35,7 +35,7 @@ amqp.connect("amqp://rabbitmq", function (error0, connection) {
             "transaction-create-queue",
             Buffer.from(JSON.stringify(payload))
           );
-          console.log("iban valid! sending message to create account");
+          console.log("iban valid! making transaction");
         } else {
           console.log("payload not valid!");
         }
