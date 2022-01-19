@@ -1,3 +1,4 @@
+import AccountForm from "../components/AccountForm";
 import AccountList from "../components/AccountList";
 import Test from "../components/Test";
 export default function Home() {
@@ -5,6 +6,7 @@ export default function Home() {
     <>
       <h1>Fin c'est cringe</h1>
       <AccountList />
+      <AccountForm />
     </>
   );
 }
