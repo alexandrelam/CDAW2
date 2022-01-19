@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { centsToPrice, makeTransaction } from "../utils/helper";
 
 export default function Test() {
   useEffect(() => {
-    console.log("test");
     fetch("http://localhost:8084/api/v1/account")
       .then((res) => res.json())
       .then((val) => setresponse(val));
@@ -10,15 +10,26 @@ export default function Test() {
 
   const [response, setresponse] = useState([]);
 
-  const convertPrice = (priceInCents) => priceInCents / 100;
+  const handleTransaction = () => {
+    makeTransaction(
+      "FR7620041010169876543210921",
+      "FR7630003035409876543210925",
+      2000
+    ).then((res) => {
+      console.log(res);
+    });
+  };
 
   return (
-    <ul>
-      {response.map((account, index) => (
-        <li key={index}>
-          {account.iban} - amount : {convertPrice(account.amountInCents)}€
-        </li>
-      ))}
-    </ul>
+    <>
+      <button onClick={handleTransaction}>make transaction</button>
+      <ul>
+        {response.map((account, index) => (
+          <li key={index}>
+            {account.iban} - amount : {centsToPrice(account.amountInCents)}€
+          </li>
+        ))}
+      </ul>
+    </>
   );
 }
