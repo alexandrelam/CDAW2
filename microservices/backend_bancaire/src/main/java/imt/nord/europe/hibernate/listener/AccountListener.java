@@ -1,6 +1,7 @@
 package imt.nord.europe.hibernate.listener;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import imt.nord.europe.hibernate.model.AccountModel;
 import imt.nord.europe.hibernate.repository.AccountRepository;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
@@ -15,9 +16,8 @@ public class AccountListener{
     @RabbitListener(queues = "account-create-queue")
     public void listen(String in) {
         System.out.println("Message read from myQueue : " + in);
-        Gson gson = new Gson();
-        Map map = gson.fromJson(in, Map.class);
-        AccountModel newAccount = new AccountModel(map.get("iban").toString(), Integer.parseInt(map.get("amountInCents").toString()));
+        JsonObject map = new Gson().fromJson(in, JsonObject.class);
+        AccountModel newAccount = new AccountModel(map.get("iban").getAsString(), map.get("amountInCents").getAsInt());
         accountRepository.save(newAccount);
     }
 
