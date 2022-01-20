@@ -1,9 +1,9 @@
 import { useState } from "react";
-import { centsToPrice, makeTransaction } from "../utils/helper";
+import { priceToCents, makeTransaction } from "../utils/helper";
 
 export default function TransactionForm() {
   const handleTransaction = () => {
-    makeTransaction(sender, receiver, centsToPrice(montant))
+    makeTransaction(sender, receiver, priceToCents(montant))
       .then((res) => {
         console.log(res);
       })
@@ -19,7 +19,7 @@ export default function TransactionForm() {
       <input type="text" onChange={(e) => setSender(e.target.value)} />
       <label>Iban receiver</label>
       <input type="text" onChange={(e) => setReceiver(e.target.value)} />
-      <label>Montant</label>
+      <label>Montant (en €)</label>
       <input type="number" onChange={(e) => setMontant(e.target.value)} />
       <button onClick={handleTransaction}>Créer transaction</button>
     </div>
