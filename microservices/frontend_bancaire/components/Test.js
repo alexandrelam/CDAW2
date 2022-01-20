@@ -14,13 +14,6 @@ export default function Test() {
   return (
     <>
       <button onClick={handleTransaction}>make transaction</button>
-      <ul>
-        {response.map((account, index) => (
-          <li key={index}>
-            {account.iban} - amount : {centsToPrice(account.amountInCents)}€
-          </li>
-        ))}
-      </ul>
     </>
   );
 }

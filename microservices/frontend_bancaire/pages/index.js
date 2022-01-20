@@ -7,6 +7,7 @@ export default function Home() {
       <h1>Fin c'est cringe</h1>
       <AccountList />
       <AccountForm />
+      <Test />
     </>
   );
 }

@@ -16,11 +16,18 @@ app.use(
   })
 );
 
-app.post("/transaction", (req, res) => {
+const corsOptions = {
+  origin: "http://localhost:3000",
+  optionsSuccessStatus: 200, // some legacy browsers (IE11, various SmartTVs) choke on 204
+};
+app.post("/transaction", cors(corsOptions), (req, res) => {
   const payload = req.body;
 
-  if (!payload.sender_iban || !payload.receiver_iban || !payload.amountInCents)
+  if (!payload.sender_iban || !payload.receiver_iban) {
     return res.status(400).send("incorrect payload");
+  }
+
+  if (!payload.amountInCents) payload.amountInCents = 0;
 
   amqp.connect("amqp://rabbitmq", function (error0, connection) {
     if (error0) {
