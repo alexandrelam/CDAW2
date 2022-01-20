@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect } from "react";
+import TransactionList from "../Components/TransactionList";
 
 export default function Transactions() {
   let transactions;
@@ -14,5 +15,9 @@ export default function Transactions() {
       });
   });
 
-  return <div>val</div>;
+  return (
+    <div>
+      <TransactionList transactions={transactions} />
+    </div>
+  );
 }
