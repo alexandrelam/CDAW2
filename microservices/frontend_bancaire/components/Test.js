@@ -1,4 +1,4 @@
-import { centsToPrice, makeTransaction } from "../utils/helper";
+import { makeTransaction } from "../utils/helper";
 
 export default function Test() {
   const handleTransaction = () => {
@@ -6,9 +6,11 @@ export default function Test() {
       "FR7620041010169876543210921",
       "FR7630003035409876543210925",
       2000
-    ).then((res) => {
-      console.log(res);
-    });
+    )
+      .then((res) => {
+        console.log(res);
+      })
+      .catch(console.log);
   };
 
   return (

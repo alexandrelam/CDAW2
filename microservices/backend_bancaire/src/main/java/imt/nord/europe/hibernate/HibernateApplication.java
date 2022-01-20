@@ -34,6 +34,11 @@ public class HibernateApplication {
         return new Queue("account-create-queue", false);
     }
 
+    @Bean
+    Queue transactionCreateQueue() {
+        return new Queue("transaction-create-queue", false);
+    }
+
 
     @Bean
     public CommandLineRunner factory(AccountRepository accountRepository, TransactionRepository transactionRepository) {

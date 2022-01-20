@@ -23,6 +23,8 @@ services:
       MYSQL_USER: spring
       MYSQL_PASSWORD: spring
     restart: always
+    security_opt:
+      - seccomp:unconfined
 
   phpmyadmin-bancaire:
     image: phpmyadmin/phpmyadmin:latest
