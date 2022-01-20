@@ -11,7 +11,7 @@ export default function AccountList() {
   const [response, setResponse] = useState([]);
 
   return (
-    <div>
+    <div className="account-wrapper">
       {response.map((compte) => {
         return (
           <AccountCard

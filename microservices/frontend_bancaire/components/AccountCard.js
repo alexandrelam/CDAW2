@@ -1,9 +1,13 @@
-export default function CardAccount({ id, iban, amount }) {
+import Link from "next/link";
+
+export default function AccountCard({ id, iban, amount }) {
   return (
-    <div>
-      <h3>{id}</h3>
-      <div>{iban}</div>
-      <div>{amount}</div>
-    </div>
+    <Link href={`/${id}`}>
+      <div className="account-card">
+        <div className="account-title">{id}</div>
+        <div>IBAN : {iban}</div>
+        <div>Solde : {amount} €</div>
+      </div>
+    </Link>
   );
 }

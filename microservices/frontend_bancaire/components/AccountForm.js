@@ -15,7 +15,7 @@ export default function AccountForm() {
   const [iban, setIban] = useState("");
   const [balance, setBalance] = useState(0);
   return (
-    <div>
+    <div className="form">
       <label>Account IBAN</label>
       <input type="text" onChange={(e) => setIban(e.target.value)} />
       <label>Account balance</label>
