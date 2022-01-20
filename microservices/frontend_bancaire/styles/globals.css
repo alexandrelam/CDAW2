@@ -35,10 +35,13 @@ a {
 }
 
 .account-card div {
-  padding: 7px;
+  margin-bottom: 7px;
+}
+.account-card button {
+  margin-bottom: 7px;
 }
 
-.account-title {
+.title {
   font-size: 2em;
 }
 
@@ -48,12 +51,36 @@ a {
   align-items: center;
   border: 2px solid black;
   width: 400px;
+  margin: 10px;
+  gap: 5px;
+}
+.form button {
+  margin-bottom: 5px;
 }
 
+.transaction {
+  border: solid black 2px;
+  margin-bottom: 2px;
+}
 .credit {
-  color: green;
+  background-color: green;
 }
 
 .debit {
-  color: red;
+  background-color: red;
+}
+
+.transaction-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list-wrapper {
+  display: flex;
+  gap: 30px;
+}
+
+.button-return {
+  height: 50px;
 }
