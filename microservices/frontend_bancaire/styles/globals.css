@@ -21,12 +21,10 @@ a {
 }
 
 .account-wrapper {
-  display: grid;
-  grid-template: repeat(2, 1fr) / repeat(3, 1fr);
-  gap: 20px 5px;
+  display: flex;
+  flex-wrap: wrap;
   padding: 5px;
 }
-
 .account-card {
   width: 400px;
   margin: 15px;
