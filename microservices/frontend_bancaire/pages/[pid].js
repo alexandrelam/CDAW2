@@ -1,19 +1,19 @@
 import { useRouter } from "next/router";
-import { useEffect } from "react";
-import TransactionList from "../Components/TransactionList";
+import { useState, useEffect } from "react";
+import TransactionList from "../components/TransactionList";
 
 export default function Transactions() {
-  let transactions;
+  const [transactions, setTransactions] = useState([]);
   const router = useRouter();
   const { pid } = router.query;
   useEffect(() => {
-    fetch(`http://localhost:8084/api/v1/account/${pid}/transactions`)
+    fetch(`http://localhost:8084/api/v1/account/1/transactions`)
       .then((res) => res.json())
-      .then((val) => (transactions = val))
-      .then(() => {
-        console.log(transactions);
+      .then((val) => {
+        setTransactions(val);
+        console.log(val);
       });
-  });
+  }, []);
 
   return (
     <div>
