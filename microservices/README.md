@@ -28,6 +28,12 @@ npm run dev
 
 ### Routes
 
+Swagger
+
+```
+http://localhost:8084/swagger-ui/index.html#/
+```
+
 phpMyAdmin
 
 ```
